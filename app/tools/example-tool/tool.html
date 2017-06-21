@@ -1,0 +1,13 @@
+{% extends "layout.nunjucks" %}
+{% block styles %}
+  <link rel="stylesheet" href="/css/tools/example-tool/style.css">
+ {% endblock %}
+
+{% block content %}
+<div class="centerContent">
+  <h1>{{title}}<h1>
+  <div id="react-root-mount"></div>
+</div>
+
+<script src="/app/tools/example-tool/entry.bundle.js"></script>
+{% endblock %}

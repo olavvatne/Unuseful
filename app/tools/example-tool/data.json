@@ -1,0 +1,5 @@
+{
+  "pageTitle": "Example tool",
+  "title": "Title from template",
+  "reactVar": "this is a value from data.json that is passed to React"
+}

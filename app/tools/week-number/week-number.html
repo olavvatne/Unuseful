@@ -1,0 +1,16 @@
+{% extends "layout.nunjucks" %}
+{% block styles %}
+  <link rel="stylesheet" href="/css/tools/week-number/style.css">
+ {% endblock %}
+
+{% block content %}
+<div class="mui-panel">
+  <h1 class="helper-center">{{toolTitle}}</h1>
+
+  <div id="tool-root-mount"></div>
+
+  <p class="helper-center">{{toolDescription}}</p>
+</div>
+
+  <script src="/app/tools/week-number/entry.bundle.js"></script>
+{% endblock %}

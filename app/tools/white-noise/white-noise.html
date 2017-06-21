@@ -1,0 +1,16 @@
+{% extends "layout.nunjucks" %}
+{% block styles %}
+  <link rel="stylesheet" href="/css/tools/white-noise/style.css">
+ {% endblock %}
+
+{% block content %}
+<div class="mui-container pleasant-sound">
+  <h1 class="helper-center">{{toolTitle}}</h1>
+  <p class="helper-center">{{toolDescription[0]}}</p>
+  <p class="helper-center">{{toolDescription[1]}}</p>
+  <div id="tool-root-mount"></div>
+
+</div>
+
+  <script src="/app/tools/white-noise/entry.bundle.js"></script>
+{% endblock %}
