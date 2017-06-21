@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "iojs"
+  - "6"
+
+install: npm install
+cache:
+  directories:
+    - "node_modules"
+
+
+before_script:
+  - npm install -g gulp-cli
+script: gulp build
