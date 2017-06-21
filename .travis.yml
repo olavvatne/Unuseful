@@ -1,7 +1,5 @@
 language: node_js
-node_js:
-  - "iojs"
-  - "6"
+node_js: "6"
 
 install: npm install
 cache:
@@ -12,3 +10,11 @@ cache:
 before_script:
   - npm install -g gulp-cli
 script: gulp build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: build
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
