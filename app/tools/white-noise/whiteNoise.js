@@ -135,11 +135,12 @@ class Sound extends React.Component {
     }
 
     _getAudio(context) {
+        const soundBase = '/public/';
         var url  = this.props.source;
         var source  = this.source;
         var that = this;
         var request = new XMLHttpRequest();
-        request.open('GET', '/' + url, true);
+        request.open('GET', soundBase + url, true);
         request.responseType = 'arraybuffer';
         request.onload = function() {
             context.decodeAudioData(request.response, function(response) {
@@ -151,9 +152,10 @@ class Sound extends React.Component {
     }
 
     render() {
+      const imgBase = '/public/';
       return (
         <div className="mui-col-md-3 mui-col-sm-4 pleasant-sound__thumb">
-            <img src={'/' + this.props.image} alt={'icon of ' + this.props.name}/>
+            <img src={imgBase + this.props.image} alt={'icon of ' + this.props.name}/>
             <p>{this.props.name}</p>
             <input className="input-range" type="range" min="0" max="100" value={this.state.volume} onChange={this._volume} />
         </div>

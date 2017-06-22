@@ -36,7 +36,7 @@ export { clean }
 export function styles() {
   return gulp.src(dirs.src + globs.scss)
   .pipe(sass())
-  .pipe(gulp.dest(dirs.dest + '/css'))
+  .pipe(gulp.dest(dirs.dest + '/public'))
   .pipe(browserSync.stream())
 }
 
@@ -59,6 +59,11 @@ export function views() {
     .pipe(nunjucksRender({
       path: [dirs.src + '/templates']
     }))
+    .pipe(rename(function(file) {
+      if (file.dirname.includes('tools')) {
+         file.dirname  = file.dirname.replace(/tools/i, '');
+      }
+    }))
     .pipe(gulp.dest(dirs.dest))
     .on('end', browserSync.reload)
 }
@@ -66,13 +71,13 @@ export function views() {
 export function images() {
   return gulp.src(dirs.public + globs.images , {since: gulp.lastRun('images')})
     .pipe(imagemin({optimizationLevel: 5}))
-    .pipe(gulp.dest(dirs.dest))
+    .pipe(gulp.dest(dirs.dest + '/' + dirs.public))
     .pipe(browserSync.stream())
 }
 
 export function sounds() {
   return gulp.src(dirs.public + globs.sounds , {since: gulp.lastRun('images')})
-    .pipe(gulp.dest(dirs.dest))
+    .pipe(gulp.dest(dirs.dest + '/' + dirs.public))
 }
 
 export function scripts(done) {

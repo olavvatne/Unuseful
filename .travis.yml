@@ -9,7 +9,9 @@ cache:
 
 before_script:
   - npm install -g gulp-cli
-script: gulp build
+script:
+  - gulp build
+  - echo $WEB_URL > ./build/CNAME
 
 deploy:
   provider: pages

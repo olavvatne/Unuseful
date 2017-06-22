@@ -9,7 +9,7 @@
   <meta name="author" content="UnusefulTools">
   <meta name="description" content="{{toolMetaDescription}}" />
 
-  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../public/base.css">
   {% block styles %} {% endblock %}
 </head>
 

@@ -1,16 +1,14 @@
 {% extends "layout.nunjucks" %}
 {% block styles %}
-  <link rel="stylesheet" href="/css/tools/week-number/style.css">
+  <link rel="stylesheet" href="/public/tools/lorum-ipsum/style.css">
  {% endblock %}
 
 {% block content %}
 <div class="mui-panel">
   <h1 class="helper-center">{{toolTitle}}</h1>
-
-  <div id="tool-root-mount"></div>
-
   <p class="helper-center">{{toolDescription}}</p>
+  <div id="tool-root-mount"></div>
 </div>
 
-  <script src="/app/tools/week-number/entry.bundle.js"></script>
+  <script src="/app/tools/lorum-ipsum/entry.bundle.js"></script>
 {% endblock %}
