@@ -1,0 +1,8 @@
+{
+  "pageTitle": "Dice Roll",
+  "toolTitle": "Dice roll",
+  "toolDescription": "Add dice and roll, as easy as it gets! You can even choose how many eyes the dice shall possess. Totally legit digital replacement for board game dice!",
+  "toolMetaDescription": "Online dice roll tool. Can be used with board games like Yatzy, Yahtzee, Dungeons and Dragons and other dice based games. Add dice with appropriate amount of eyes and roll. Available dice includes 4-sided dice, 6-sided dice, 8-sided dice, 10-sided dice, 12-sided dice and 20-sided dice.",
+  "toolPath": "dice",
+  "toolContainerClass": "mui-panel"
+}

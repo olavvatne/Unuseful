@@ -131,7 +131,7 @@ const createBundle = options => {
   const rebundle = () => {
     return b.bundle()
     .on('error', function(e) {
-      console.log(colors.red('bundle error at ' + entry + ' ' + e));
+      console.log(colors.red('bundle error at ' + opts.entries[0] + ' ' + e));
     })
     .pipe(source(opts.entries[0]))
     .pipe(buffer())
