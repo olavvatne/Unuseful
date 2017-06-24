@@ -2,5 +2,7 @@
   "pageTitle": "Lorem Ipsum Generator",
   "toolTitle": "Lorem Ipsum",
   "toolDescription": "A simple lorem ipsum generator. Adjust the number of paragraphs and copy that text!",
-  "toolMetaDescription": "Online lorem ipsum generator. Perfect as placeholder text for graphic design and web development projects. Easy to copy into clipboard. lorum ipsum."
+  "toolMetaDescription": "Online lorem ipsum generator. Perfect as placeholder text for graphic design and web development projects. Easy to copy into clipboard. lorum ipsum.",
+  "toolPath": "lorum-ipsum",
+  "toolContainerClass": "mui-panel"
 }
