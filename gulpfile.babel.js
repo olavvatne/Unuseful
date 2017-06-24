@@ -81,10 +81,16 @@ function getDataForFile(file) {
 }
 
 export function views() {
+  const manageEnvironment = (env) => {
+    const isProd = environment === 'production' ? true: false;
+    env.addGlobal('isProd', isProd);
+  };
+
   return gulp.src(dirs.src + globs.html)
     .pipe(data(getDataForFile))
     .pipe(nunjucksRender({
-      path: [dirs.src + '/templates']
+      path: [dirs.src + '/templates'],
+      manageEnv: manageEnvironment,
     }))
     .pipe(rename(function(file) {
       if (file.dirname.includes('tools')) {
