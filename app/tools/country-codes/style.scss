@@ -1,0 +1,48 @@
+.countryCodesComponent {
+  text-align: center;
+  //margin: auto;
+
+}
+
+@media screen and (min-width: 500px) {
+  .countryCodesTable {
+    width: 450px !important;
+  }
+}
+
+.countryCodesTable {
+  margin: auto;
+  //text-align: center;
+  //margin-left: 33%;
+  padding-left: 30px;
+  width: 250px;
+
+  tbody {
+    text-align: left;
+
+
+    td {
+      padding: 7px;
+      padding-left: 10px;
+      padding-bottom: 0px;
+      border-bottom: 1px solid darkgray;
+
+      img {
+        padding-right: 5px;
+        float: left;
+      }
+      object {
+        padding-right: 5px;
+        float: left;
+      }
+    }
+    .cname {
+      float: left;
+    }
+    .ccode {
+      float: right;
+    }
+
+  }
+
+}
