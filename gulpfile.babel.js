@@ -3,7 +3,7 @@ import sass from 'gulp-sass';
 import browserSync from 'browser-sync';
 import imagemin from 'gulp-imagemin';
 import browserify from 'browserify';
-import bablify from 'babelify';
+import babelify from 'babelify';
 import nunjucksRender from 'gulp-nunjucks-render';
 import data from 'gulp-data';
 import del from 'del';
@@ -13,6 +13,14 @@ import source from 'vinyl-source-stream';
 import rename from 'gulp-rename';
 import es from 'event-stream';
 import colors from 'colors/safe';
+import uglify from 'gulp-uglify';
+import buffer from 'gulp-buffer';
+import watchify from 'watchify';
+import packageJson from './package.json';
+
+/* ======== Settings ======== */
+
+let isWatchify = false;
 
 const dirs = {
   src: 'app',
@@ -29,6 +37,11 @@ const globs = {
   json: '/**/*.json',
   sounds: '/**/*.mp3',
 }
+
+const dependencies = Object.keys(packageJson.dependencies || {});
+console.log(dependencies);
+/* ============================ */
+/* ======== Tasks ============= */
 
 const clean = () => del([dirs.dest])
 export { clean }
@@ -80,6 +93,44 @@ export function sounds() {
     .pipe(gulp.dest(dirs.dest + '/' + dirs.public))
 }
 
+//Creates a bundle which is watched by watchify. Limits unecessary rebundling.
+const createBundle = options => {
+  const setupOptions = {
+    debug: false,
+    cache: {},
+    packageCache: {},
+    fullPaths: isWatchify,
+  }
+  const opts = Object.assign({}, watchify.args, options, setupOptions);
+  let b = browserify(opts);
+  b.external(dependencies);
+  b.transform(babelify);
+
+  const rebundle = () => {
+    return b.bundle()
+    .on('error', function(e) {
+      console.log(colors.red('bundle error at ' + entry + ' ' + e));
+    })
+    .pipe(source(opts.entries[0]))
+    .pipe(buffer())
+    .pipe(uglify({compress: {unused: false}}))
+    .pipe(rename({
+      extname: '.bundle.js'
+    }))
+    .pipe(gulp.dest(dirs.dest))
+    .pipe(browserSync.stream());
+  }
+
+  if (isWatchify) {
+    b.plugin(watchify);
+    b.on('update', rebundle);
+    b.on('log', (msg) => console.log(`Bundle created: ${msg}`));
+  }
+
+  return rebundle();
+}
+
+// Creates separate bundles for each subpage. Only app code is bundled.
 export function scripts(done) {
   glob(dirs.src + globs.entry, (err, files) => {
     if (err) {
@@ -87,28 +138,40 @@ export function scripts(done) {
       done(err);
     }
 
-    var tasks = files.map((entry) => {
-      console.log(entry);
-      return browserify(entry)
-      .transform('babelify')
-      .bundle()
-      .on('error', function(e) {
-        console.log(colors.red('bundle error at ' + entry + ' ' + e));
-      })
-      .pipe(source(entry))
-      .pipe(rename({
-        extname: '.bundle.js'
-      }))
-      .pipe(gulp.dest(dirs.dest))
-      .pipe(browserSync.stream());
+    const tasks = files.map((entry) => {
+      console.log(`Creating bundle for ${entry}`);
+      return createBundle({
+        entries: [entry],
+        extensions: ['.js'],
+      });
     });
     es.merge(tasks).on('end', done);
   });
 }
 
+export function vendorScripts() {
+  return browserify()
+  .require(dependencies)
+  .bundle()
+  .on('error', (err) => console.log(err))
+  .pipe(source('vendor.js'))
+  .pipe(buffer())
+  .pipe(uglify({compress: {unused: false}}))
+  .pipe(gulp.dest(dirs.dest + '/app'))
+}
+
+//Enables watchify on watch task
+function setupWatch(done) {
+  isWatchify = true;
+  done();
+}
+
+/* ============================== */
+/* ======== Build and Watch ===== */
+
 //Watches for file changes in app and runs task whenever there are changes
 function watchAssets() {
-  gulp.watch(dirs.src + globs.scripts, scripts)
+  //gulp.watch(dirs.src + globs.scripts, scripts)
   gulp.watch(dirs.src + globs.scss, styles)
   gulp.watch(dirs.src + globs.images, images)
   gulp.watch(dirs.src + globs.html, views)
@@ -121,8 +184,8 @@ function watchAssets() {
   })
 }
 
-const build = gulp.series(clean, gulp.parallel(styles, scripts, images, sounds, views))
+const build = gulp.series(clean, gulp.parallel(styles, vendorScripts, scripts, images, sounds, views))
 export { build }
 
-const watch = gulp.series(clean, build, watchAssets)
+const watch = gulp.series(setupWatch, clean, build, watchAssets)
 export { watch }

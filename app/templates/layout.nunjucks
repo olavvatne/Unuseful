@@ -16,7 +16,9 @@
 <body>
   <div id="wrapper" >
   {% include "header.nunjucks" %}
+    <script src="/app/vendor.js"></script>
     {% block content %} {% endblock %}
   </div>
+
 </body>
 </html>
