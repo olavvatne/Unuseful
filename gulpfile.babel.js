@@ -16,12 +16,26 @@ import colors from 'colors/safe';
 import uglify from 'gulp-uglify';
 import buffer from 'gulp-buffer';
 import watchify from 'watchify';
+import envify from 'envify/custom';
 import packageJson from './package.json';
+
+const getEnvironment = () => {
+  if (process.env.NODE_ENV) {
+    return process.env.NODE_ENV;
+  }
+  else {
+    return 'development';
+  }
+}
 
 /* ======== Settings ======== */
 
 let isWatchify = false;
 
+// Envify. React has two modes. Development and production
+// Set environment variable for production. IE variable in Travis-ci for instance
+const environment = getEnvironment();
+console.log("Environment: " + environment);
 const dirs = {
   src: 'app',
   dest: 'build',
@@ -39,7 +53,7 @@ const globs = {
 }
 
 const dependencies = Object.keys(packageJson.dependencies || {});
-console.log(dependencies);
+
 /* ============================ */
 /* ======== Tasks ============= */
 
@@ -101,10 +115,12 @@ const createBundle = options => {
     packageCache: {},
     fullPaths: isWatchify,
   }
+
   const opts = Object.assign({}, watchify.args, options, setupOptions);
   let b = browserify(opts);
   b.external(dependencies);
   b.transform(babelify);
+  b.transform(envify({ _: 'purge', NODE_ENV: environment }), {global: true});
 
   const rebundle = () => {
     return b.bundle()

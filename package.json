@@ -1,10 +1,12 @@
 {
-  "name": "staticreactbuilds",
+  "name": "Unuseful",
   "version": "1.0.0",
-  "description": "A static html site generator with react support",
+  "description": "Unuseful.net - tools website",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olavvatne/Unuseful"
   },
   "author": "Unuseful",
   "license": "ISC",
@@ -17,11 +19,13 @@
     "browserify": "^14.4.0",
     "colors": "^1.1.2",
     "del": "^3.0.0",
+    "envify": "^4.0.0",
     "event-stream": "^3.3.4",
     "glob": "^7.1.2",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-buffer": "0.0.2",
     "gulp-data": "^1.2.1",
+    "gulp-envify": "^1.0.0",
     "gulp-imagemin": "^3.3.0",
     "gulp-nunjucks-render": "^2.2.1",
     "gulp-rename": "^1.2.2",
