@@ -25,16 +25,14 @@ class UIText extends React.Component {
 
         //var errorText = (<small style={{"position":"absolute", "color": "red"}}>Not a number</small>)
         return (
-            <div className="mui-form-group">
-                <input ref="element" type="text"
-                       className="mui-form-control"
-                       value={this.state.value}
-                       onChange={this._handle}
-                       pattern={this.props.validationPattern}
-                       style={this.props.style}/>
-                    <label className="mui-form-floating-label">{this.props.labelText}</label>
-
-            </div>
+          <div className="mui-textfield mui-textfield--float-label" style={{margin: "5px"}}>
+            <input ref="element" type="text"
+             value={this.state.value}
+             onChange={this._handle}
+             pattern={this.props.validationPattern}
+             style={this.props.style}/>
+            <label>{this.props.labelText}</label>
+          </div>
         )
     }
 };

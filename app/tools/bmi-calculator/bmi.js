@@ -79,11 +79,11 @@ class BMI extends React.Component {
                         </div>
                     </div>
                     <div className="mui-col-md-6">
-                        <div className="mui-text-display4 mui-text-accent mui-text-center"
+                        <div className="mui--text-display4 mui--text-accent mui--text-center"
                              style={{marginTop:"20px"}}>
                             { Math.round(this.state.bmi * 100)/100 }
                         </div>
-                        <p className="mui-text-display3 mui-text-accent mui-text-center">
+                        <p className="mui--text-display3 mui--text-accent mui--text-center">
                             { this._getBMIText() }
                         </p>
                     </div>
@@ -92,6 +92,5 @@ class BMI extends React.Component {
         );
     }
 };
-BMI.toolMetaDescription = "Simple online BMI calculator. Compatible units include kilograms (kg) and lbs (pounds) for weight, centimetres (cm) and inches for height"
 
 module.exports = BMI;

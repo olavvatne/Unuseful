@@ -32,7 +32,7 @@ class UISelect extends React.Component {
         });
         //TODO: Change state!
         return (
-             <div className="mui-select" >
+             <div className="mui-select" style={{margin: '5px'}}>
                  <select onChange={this._handle}
                      value={this.state.value} style={this.props.style}>
                      {items}
