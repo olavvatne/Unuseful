@@ -26,23 +26,24 @@
       padding-left: 10px;
       padding-bottom: 0px;
       border-bottom: 1px solid darkgray;
-
-      img {
-        padding-right: 5px;
-        float: left;
-      }
-      object {
-        padding-right: 5px;
-        float: left;
-      }
     }
     .cname {
       float: left;
+      line-height: 38px;
+      vertical-align: middle;
     }
     .ccode {
       float: right;
+      line-height: 38px;
+      vertical-align: middle;
     }
 
+    .cflag {
+      display: inline;
+      float: left;
+      padding-left: 0;
+      padding-right: 1em;
+    }
   }
 
 }

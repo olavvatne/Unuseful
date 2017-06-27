@@ -64,16 +64,14 @@ class CountryCodes extends React.Component {
     render() {
 
         var filtered_result = this.state.filtered_countries.map(function(c) {
-            var iconPath = "/public/images/countryFlags/" + c.short_name + ".png";
-            var fallbackIcon = "/images/countryFlags/fallback.png";;
-
+            const flag = `flag ${c.short_name.toLowerCase()}`;
             return (
                 <tr key={c.short_name}>
                     <td>
                         <div>
-                            <object data={iconPath} type="image/png">
-                                <img src={fallbackIcon} alt={c.short_name}/>
-                            </object>
+                            <ul className="f32 cflag">
+                              <li className={flag}></li>
+                            </ul>
                             <span className="cname">{c.full_name}</span>
                             <span className="ccode">{c.country_code}</span>
                         </div>
