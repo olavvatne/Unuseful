@@ -4,10 +4,19 @@
 <head>
   <meta charset="utf-8">
 
+  {% if pageTitle %}
   <title>{{pageTitle + " - "}}Unuseful Tools</title>
+  {% endif %}
+  {% if not pageTitle %}
+  <title>Unuseful Tools</title>
+  {% endif %}
+
   <meta name="description" content="A static react starter">
   <meta name="author" content="UnusefulTools">
   <meta name="description" content="{{toolMetaDescription}}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="referrer" content="no-referrer"/>
 
   {% if isProd %}
     <script>
@@ -27,7 +36,6 @@
 <body>
   <div id="wrapper" >
   {% include "header.nunjucks" %}
-    <script src="/app/vendor.js"></script>
     {% block content %} {% endblock %}
   </div>
 

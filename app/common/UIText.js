@@ -25,7 +25,7 @@ class UIText extends React.Component {
 
         //var errorText = (<small style={{"position":"absolute", "color": "red"}}>Not a number</small>)
         return (
-          <div className="mui-textfield mui-textfield--float-label" style={{margin: "5px"}}>
+          <div className="mui-textfield mui-textfield--float-label" style={{margin: '5px'}}>
             <input ref="element" type="text"
              value={this.state.value}
              onChange={this._handle}

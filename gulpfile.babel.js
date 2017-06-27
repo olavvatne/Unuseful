@@ -17,6 +17,7 @@ import uglify from 'gulp-uglify';
 import buffer from 'gulp-buffer';
 import watchify from 'watchify';
 import envify from 'envify/custom';
+import fs from 'fs';
 import packageJson from './package.json';
 
 const getEnvironment = () => {
@@ -68,14 +69,26 @@ export function styles() {
 }
 
 function getDataForFile(file) {
-  const jsonPath = path.dirname(file.path) + '/data.json';
+  const p = path.parse(file.path);
+  if (path.basename(p.dir) === dirs.src) {
+    const all = fs.readdirSync(p.dir + '/tools').map(folder => {
+      return getSubpageConfig(path.join(p.dir, 'tools', folder));
+    });
+    return {subpages: all};
+  }
+
+  return getSubpageConfig(path.dirname(file.path));
+}
+
+function getSubpageConfig(dirPath) {
+  const jsonPath = path.join(dirPath, 'data.json');
   try {
     var json = require(jsonPath);
     return json;
   }
   catch(err) {
     // Passing data to template is optional
-    console.log(colors.blue('No json data in ' + file.path))
+    console.log(colors.blue('No json data in ' + dirPath))
     return {}
   }
 }

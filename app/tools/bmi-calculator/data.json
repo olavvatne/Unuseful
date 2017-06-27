@@ -4,5 +4,6 @@
   "toolDescription": "The body mass index is a value based on an individual's weight and height",
   "toolMetaDescription": "Simple online BMI calculator. Compatible units include kilograms (kg) and lbs (pounds) for weight, centimetres (cm) and inches for height",
   "toolPath": "bmi-calculator",
-  "toolContainerClass": "mui-panel"
+  "toolContainerClass": "mui-panel",
+  "toolImage": "scale.svg"
 }

@@ -9,6 +9,6 @@
   <p class="helper-center">{{toolDescription}}</p>
   <div id="tool-root-mount"></div>
 </div>
-
+  <script src="/app/vendor.js"></script>
   <script src="/app/tools/{{toolPath}}/entry.bundle.js"></script>
 {% endblock %}

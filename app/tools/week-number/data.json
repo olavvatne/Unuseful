@@ -4,5 +4,6 @@
   "toolDescription": "This is the current ISO week of the year.",
   "toolMetaDescription": "Find the current week number of the year online. Displayed in ISO format",
   "toolPath": "week-number",
-  "toolContainerClass": "mui-panel"
+  "toolContainerClass": "mui-panel",
+  "toolImage": "calendar.svg"
 }

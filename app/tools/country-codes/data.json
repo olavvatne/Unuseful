@@ -4,5 +4,6 @@
   "toolDescription": "",
   "toolMetaDescription": "Telephone prefix country code for all countries",
   "toolPath": "country-codes",
-  "toolContainerClass": ""
+  "toolContainerClass": "",
+  "toolImage": "countryCodes.svg"
 }

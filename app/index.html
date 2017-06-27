@@ -1,41 +1,17 @@
-<!doctype html>
-
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>Unuseful Tools</title>
-  <meta name="description" content="A website where you can find many unseful tools">
-  <meta name="author" content="UnusefulTools">
-
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-68143422-1', 'auto');
-    ga('send', 'pageview');
-  </script>
-
-  <link rel="stylesheet" href="/public/base.css">
-</head>
-
-<body>
-  <div id="wrapper" >
-    {% include "header.nunjucks" %}
-    <div class="centerContent">
-      <h1>Static site generator with React</h1>
-      <a href="/example-tool">Example page #1</a>
-      <a href="/week-number">Week number</a>
-      <a href="/lorum-ipsum">Lorum ipsum</a>
-      <a href="/white-noise">White noise</a>
-      <a href="/special-characters">Special characters</a>
-      <a href="/dice">Dice</a>
-      <a href="/country-codes">Country Codes</a>
-      <a href="/bmi-calculator">BMI Calculator</a>
+{% extends "layout.nunjucks" %}
+{% block content %}
+<div class="row tool-link-container">
+  {% for page in subpages %}
+    <div class="mui-col-md-3 mui-col-sm-4  tool-thumb">
+            <div>
+            <a href="/{{page.toolPath}}" class="tool-thumb__content">
+                <img src="/public/images/tool/{{page.toolImage}}" >
+                <p>{{page.pageTitle}}</p>
+            </a>
+        </div>
     </div>
-    {% include "footer.nunjucks" %}
-  </div>
-</body>
-</html>
+  {% else %}
+    <div>No tools</div>
+  {% endfor %}
+</div>
+{% endblock %}
