@@ -7,7 +7,7 @@ class UIText extends React.Component {
     constructor() {
         super();
         this._handle = this._handleChange.bind(this);
-        this.state = { value: null};
+        this.state = { value: ""};
     }
 
     getValue() {
@@ -15,6 +15,11 @@ class UIText extends React.Component {
         //character behind. FindDomNode works! Is this the best way of doing things?
         return this.refs.element.value;
     }
+
+    reset() {
+      this.setState({value: ""});
+    }
+
     _handleChange(event) {
         //TODO: Necessary to set state?
         this.setState({value: event.target.value});

@@ -15,17 +15,23 @@ import es from 'event-stream';
 import colors from 'colors/safe';
 import uglify from 'gulp-uglify';
 import buffer from 'gulp-buffer';
+import sourcemaps from 'gulp-sourcemaps'
 import watchify from 'watchify';
 import envify from 'envify/custom';
 import fs from 'fs';
 import packageJson from './package.json';
+
+const envTypes = {
+  development: 'development',
+  production: 'production',
+};
 
 const getEnvironment = () => {
   if (process.env.NODE_ENV) {
     return process.env.NODE_ENV;
   }
   else {
-    return 'development';
+    return envTypes.development;
   }
 }
 
@@ -95,7 +101,7 @@ function getSubpageConfig(dirPath) {
 
 export function views() {
   const manageEnvironment = (env) => {
-    const isProd = environment === 'production' ? true: false;
+    const isProd = environment === envTypes.production ? true: false;
     env.addGlobal('isProd', isProd);
   };
 
@@ -128,8 +134,9 @@ export function sounds() {
 
 //Creates a bundle which is watched by watchify. Limits unecessary rebundling.
 const createBundle = options => {
+  // debug option enables source maps
   const setupOptions = {
-    debug: false,
+    debug: environment === envTypes.development,
     cache: {},
     packageCache: {},
     fullPaths: isWatchify,
@@ -138,7 +145,11 @@ const createBundle = options => {
   const opts = Object.assign({}, watchify.args, options, setupOptions);
   let b = browserify(opts);
   b.external(dependencies);
-  b.transform(babelify);
+  b.transform(babelify, {
+    presets: ["es2015"],
+    sourceMaps: environment === envTypes.development
+  });
+  // Envify replaces Node-style environment variables with plain strings.
   b.transform(envify({ _: 'purge', NODE_ENV: environment }), {global: true});
 
   const rebundle = () => {
@@ -148,10 +159,12 @@ const createBundle = options => {
     })
     .pipe(source(opts.entries[0]))
     .pipe(buffer())
-    .pipe(uglify({compress: {unused: false}}))
     .pipe(rename({
       extname: '.bundle.js'
     }))
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(uglify({compress: {unused: false}}))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(dirs.dest))
     .pipe(browserSync.stream());
   }
@@ -185,13 +198,15 @@ export function scripts(done) {
 }
 
 export function vendorScripts() {
-  return browserify()
+  return browserify({debug: environment === envTypes.development})
   .require(dependencies)
   .bundle()
   .on('error', (err) => console.log(err))
   .pipe(source('vendor.js'))
   .pipe(buffer())
+  .pipe(sourcemaps.init({loadMaps: true}))
   .pipe(uglify({compress: {unused: false}}))
+  .pipe(sourcemaps.write('./'))
   .pipe(gulp.dest(dirs.dest + '/app'))
 }
 
