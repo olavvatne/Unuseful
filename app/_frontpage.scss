@@ -18,10 +18,12 @@
 .tool-link-container {
   padding: 1em;
   padding-top: 10em;
+  text-align: center;
 }
 .tool-thumb {
   margin-top: 25px;
-
+  display: inline-flex;
+  max-width: 200px;
   div {
 
     .tool-thumb__content {

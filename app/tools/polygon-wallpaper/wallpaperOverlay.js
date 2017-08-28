@@ -3,26 +3,6 @@ import PropTypes from 'prop-types';
 
 class WallpaperOverlay extends React.Component {
 
-    // Helper to do download button with data content generated last-minute.
-    saveAs(uri, filename) {
-      var link = document.createElement('a');
-      if (typeof link.download === 'string') {
-        link.href = uri;
-        link.download = filename;
-
-        //Firefox requires the link to be in the body
-        document.body.appendChild(link);
-
-        //simulate click
-        link.click();
-
-        //remove the link when done
-        document.body.removeChild(link);
-      } else {
-        window.open(uri);
-      }
-    }
-
     _getArea(screenIdx) {
       const pxPerScreen = Math.floor(this.props.fullWidth / this.props.screens);
 
@@ -35,7 +15,7 @@ class WallpaperOverlay extends React.Component {
         pxPerScreen,
         this.props.fullWidth);
 
-      const saveAction = () => {this.saveAs(wallPaperUrl(), 'wallpaper' + screenIdx)};
+      const saveAction = () => {WallpaperOverlay.saveAs(wallPaperUrl(), 'wallpaper' + screenIdx)};
 
       //Vertical sep, only if more than one screen
       const sep = this.props.screens > 1 && screenIdx < this.props.screens - 1 ? "separator" : "";
@@ -75,6 +55,33 @@ WallpaperOverlay.getDataURLSubImage = function(canvas,x,y,w,h) {
   var ctx = can.getContext("2d");
   ctx.drawImage(canvas,-x,-y);
   return can.toDataURL("image/png");
-}
+};
+
+// Helper to do download button with data content generated last-minute.
+WallpaperOverlay.saveAs = function(uri, filename) {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+      link.href = uri;
+      link.download = filename;
+
+      //Firefox requires the link to be in the body
+      document.body.appendChild(link);
+
+      //simulate click
+      link.click();
+
+      //remove the link when done
+      document.body.removeChild(link);
+    } else {
+      window.open(uri);
+    }
+  };
+
+WallpaperOverlay.ReadableName = [
+  [''],
+  ['left', 'right'],
+  ['left', 'center', 'right'],
+  ['left', 'center-left', 'center-right', 'right'],
+];
 
 module.exports = WallpaperOverlay;

@@ -91,8 +91,6 @@ class PolygonWallpaper extends React.Component {
       { sizes.map((size) => {
         const s = size.width + "x" + size.height
         const isSelected = this.state.width === size.width && this.state.height === size.height;
-        console.log(this.state.width, size.width, this.state.height, size.height)
-        console.log(isSelected)
         const arrowComp = isSelected ? "fa-caret-right" : "fa-min";
         return (
           <a key={s} onClick={() => this._setFixedImageSize(size)}>
@@ -134,6 +132,24 @@ class PolygonWallpaper extends React.Component {
       </button>
     )
   }
+
+  renderDownloadLink(screenIdx, canvas) {
+    const pxPerScreen = Math.floor(this.state.width / this.state.screens);
+    console.log(screenIdx);
+    // Create a sub-canvas from master canvas containing entire wallpaper. Lazy generation
+    // of png image from sub canvas. When user clicks button.
+    const wallPaperUrl = () => WallpaperOverlay.getDataURLSubImage(
+      canvas,
+      pxPerScreen*screenIdx,
+      0,
+      pxPerScreen,
+      this.state.width);
+
+    const saveAction = () => {WallpaperOverlay.saveAs(wallPaperUrl(), 'wallpaper' + screenIdx)};
+    const name = WallpaperOverlay.ReadableName[this.state.screens-1][screenIdx];
+    return ( <a key={'sc' + screenIdx} style={{marginRight: "10px" }} href="" onClick={saveAction}>Wallpaper {name}</a>);
+  }
+
   render() {
     //Configures pattern. Every state change usually means a config parameter has changed.
     const pattern = Trianglify({
@@ -146,12 +162,16 @@ class PolygonWallpaper extends React.Component {
       seed: this.state.seed,
       cell_size: this.state.cellSize,
   	});
+    const canv = pattern.canvas();
+    const downloadLinks = [...Array(this.state.screens)].map((x, i) =>
+      this.renderDownloadLink(i, canv)
+    );
 
     return (
       <div>
         <WallpaperOverlay
           screens={this.state.screens}
-          canvas={pattern.canvas()}
+          canvas={canv}
           fullWidth={this.state.width}
           fullHeight={this.state.height}
         />
@@ -174,7 +194,7 @@ class PolygonWallpaper extends React.Component {
         </svg>
 
         <div className="control-panel">
-
+          <div className="panel-content">
           <h3>Variance</h3>
           <input className="input-range" type="range" min="0" max="100" value={this.state.variance} onChange={(e) => this._varianceChange(e) } />
 
@@ -195,6 +215,11 @@ class PolygonWallpaper extends React.Component {
 
           <h3>Screen size</h3>
           { this.renderSizeComponent(PolygonWallpaper.ScreenSizes) }
+
+          <h3>Download</h3>
+          { downloadLinks }
+
+          </div>
         </div>
       </div>
     );
