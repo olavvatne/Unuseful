@@ -13,7 +13,7 @@ class WallpaperOverlay extends React.Component {
         pxPerScreen*screenIdx,
         0,
         pxPerScreen,
-        this.props.fullWidth);
+        this.props.fullHeight);
 
       const saveAction = () => {WallpaperOverlay.saveAs(wallPaperUrl(), 'wallpaper' + screenIdx)};
 

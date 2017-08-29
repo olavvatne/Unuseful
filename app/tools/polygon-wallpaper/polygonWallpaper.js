@@ -143,7 +143,7 @@ class PolygonWallpaper extends React.Component {
       pxPerScreen*screenIdx,
       0,
       pxPerScreen,
-      this.state.width);
+      this.state.heigth);
 
     const saveAction = () => {WallpaperOverlay.saveAs(wallPaperUrl(), 'wallpaper' + screenIdx)};
     const name = WallpaperOverlay.ReadableName[this.state.screens-1][screenIdx];
