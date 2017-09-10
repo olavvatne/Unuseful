@@ -30,6 +30,7 @@
     </script>
   {% endif %}
   <link rel="stylesheet" href="../../public/base.css">
+  <script src="//cdn.muicss.com/mui-0.9.24/js/mui.min.js"></script>
   {% block styles %} {% endblock %}
 </head>
 

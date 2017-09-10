@@ -1,0 +1,130 @@
+@import "node_modules/slick-carousel/slick/slick.scss";
+@import "node_modules/slick-carousel/slick/slick-theme.scss";
+
+.cooking-wrapper {
+
+  .cooking-content {
+
+    text-align: Center;
+    margin: auto;
+    max-width: 800px;
+    margin-top: 1em;
+
+    input {
+      text-align: center;
+    }
+    .mui-btn {
+      @media (max-width:800px){
+        padding: 0px 13px;
+      }
+    }
+    .cooking-units {
+
+      margin-bottom: 1em;
+    }
+
+    .food-item-selector {
+      margin-top: 1em;
+      margin-bottom: 1em;
+
+      p {
+        position: absolute;
+        bottom: 0;
+        margin: 0.7em;
+        padding-left: 0.2em;
+        padding-right: 0.2em;
+        text-align: center;
+        color: white;
+        background: rgb(0, 0, 0); /* fallback color */
+        background: rgba(0, 0, 0, 0.7);
+
+        @media (min-width:800px){
+          font-size: 1.5em;
+                margin: 0.5em;
+        }
+      }
+
+      .image-container-desktop {
+        border: 4px solid transparent;
+        position: relative;
+        display: inline-block;
+        margin: 1em;
+        height: 120px;
+        width: 120px;
+        @media (max-width:800px){
+          height: 100px;
+          width: 100px;
+        }
+        img {
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+
+      .food-selected {
+        //transform: scale(1.1);
+        border: 4px solid #2196F3;
+      }
+
+      .food-item {
+        .image-container-mobile {
+          position: relative;
+          width: 90%;
+          vertical-align: middle;
+
+
+
+          img {
+            background-color: gray;
+            object-fit: cover;
+            width: 100%;
+            user-drag: none;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-drag: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+          }
+        }
+
+      }
+    }
+    .separator {
+      content: '';
+    	display: block;
+    	margin-top: 2px;
+    	border-top: 1px solid #8c8b8b;
+    	border-bottom: 1px solid #fff;
+    }
+    .cooking-result {
+      height: 150px;
+
+      display: flex;
+      justify-content: center; /* align horizontal */
+      align-items: center; /* align vertical */
+
+      table {
+        width: 100%;
+        border-spacing: 20px;
+      }
+      td {
+        border-radius: 150px;
+        background-color: white;
+        padding-top: 0.1em;
+        padding-bottom: 0.1em;
+        color: #3B467C;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        line-height: 1.1em;
+        font-size: 4em;
+        font-family: "Inconsolata";
+        text-shadow: 2px 1px #ccc;
+
+        @media (max-width:800px){
+          font-size: 2.5em;
+        }
+      }
+
+    }
+  }
+}

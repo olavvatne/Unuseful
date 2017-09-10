@@ -10,6 +10,12 @@ class UIText extends React.Component {
         this.state = { value: ""};
     }
 
+    componentDidMount() {
+      if (this.props.autofocus) {
+        this.refs.element.focus();
+      }
+    }
+
     getValue() {
         //TODO: State not updated itself before getValue is called. Results in form being one
         //character behind. FindDomNode works! Is this the best way of doing things?

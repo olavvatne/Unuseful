@@ -1,0 +1,8 @@
+{
+  "pageTitle": "Cooking Converter",
+  "toolDescription": "",
+  "toolMetaDescription": "Mobile optimized cooking converter. Convert from gram to lbs.",
+  "toolPath": "cooking-converter",
+  "toolContainerClass": "cooking",
+  "toolImage": "chef.svg"
+}
