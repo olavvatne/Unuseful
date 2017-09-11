@@ -26,13 +26,23 @@ class CookingConverter extends React.Component {
   _foodSelected(name,) {
       this.setState({selectedFood: name});
   }
+  _getCurrentUnits() {
+    // Temperature does not have anything to do with the food items.
+    // Split units into two. The different subsets will utilize altered UIs.
+    if (this.state.selected === 'c' || this.state.selected === 'f') {
+      return [CookingConverter.units[4], CookingConverter.units[5]];
+    }
+    else {
+      return [CookingConverter.units[0], CookingConverter.units[1], CookingConverter.units[2], CookingConverter.units[3]];
+    }
+  }
 
   renderUnitButtons(stateParam) {
     return CookingConverter.units.map((unit) => {
       return (
         <UIButton
           key={unit.name}
-          label={unit.name}
+          label={unit.pretty}
           primary={this.state[stateParam] === unit.name}
           onClick={() => {this._unitClicked(unit, stateParam)}} />
         );
@@ -60,7 +70,9 @@ class CookingConverter extends React.Component {
     return CookingConverter.foodItems.map((item) => {
       const sel = item.name === this.state.selectedFood ? "food-selected" : "";
       return (
-        <div className={'image-container-desktop ' + sel} onClick={()=> this._foodSelected(item.name)}>
+        <div key={item.name}
+          className={'image-container-desktop ' + sel}
+          onClick={()=> this._foodSelected(item.name)}>
           <p>{item.name}</p>
           <img src={'/public/images/cooking/' + item.image + '.png'}/>
         </div>
@@ -68,37 +80,64 @@ class CookingConverter extends React.Component {
     })
   }
 
+  // Explanatory header. First check if c or f. And only then render the food converters
   renderConvertHeader() {
-    const n = CookingConverter.units.length;
-    return CookingConverter.units.map((unit) => {
-      if (unit.name === this.state.selected) {
+    const val = this.state.inputValue;
+    const sel = this.state.selected;
+
+    if (sel == 'c') {
+        return (<th>{val} &ordm;C in &ordm;F </th>);
+    }
+    else if (sel == 'f') {
+      return (<th>{val} &ordm;F in &ordm;C </th>);
+    }
+
+    const un = this._getCurrentUnits();
+    const n = un.length;
+    return un.map((unit) => {
+      if (unit.name === sel) {
         return null;
       }
 
       return (
         <th key={unit.name} width={n+"%"}>
-          {this.state.inputValue} {this.state.selected} {CookingConverter.trunc(this.state.selectedFood, 8)} in {unit.name}
+          {val} {sel} {CookingConverter.trunc(this.state.selectedFood, 8)} in {unit.name}
         </th>
       )
     });
   }
 
+  // Render result in a table. First check if c or f. Then food if not temperature.
   renderResultItems() {
-    return CookingConverter.units.map((unit) => {
-      if (unit.name === this.state.selected) {
+    const val = this.state.inputValue;
+    const selected = this.state.selected;
+
+    if (selected == 'c') {
+        return (<td>{CookingConverter.converters['c->f'](val).toFixed(2)}</td>);
+    }
+    else if (selected == 'f') {
+      return (<td>{CookingConverter.converters['f->c'](val).toFixed(2)}</td>);
+    }
+
+    const un = this._getCurrentUnits();
+    return un.map((unit) => {
+      if (unit.name === selected) {
         return null;
       }
       const inputUnit = CookingConverter.units.filter(i => i.name === this.state.selected)[0];
       const food = CookingConverter.foodItems.filter(i => i.name === this.state.selectedFood)[0];
       return (
         <td key={unit.name}>
-          {CookingConverter.convert(this.state.inputValue, inputUnit, unit, food).toFixed(2)}
+          {CookingConverter.convert(val, inputUnit, unit, food).toFixed(2)}
         </td>
       )
     });
   }
 
   render() {
+    const isFoodRelated = this.state.selected !== 'c' && this.state.selected !== 'f';
+    const resultClass = !isFoodRelated ? 'temp-result' : '';
+
     return (
       <div className="cooking-wrapper">
         <div className="cooking-content">
@@ -111,16 +150,20 @@ class CookingConverter extends React.Component {
             onChange={(val) => {this._valueEntered(val)}}
             autofocus/>
 
-          <div className="food-item-selector">
-          {this.md.mobile() ?
-              <Slider {...CookingConverter.foodSlider}>
-                {this.renderFoodSliderItems()}
-              </Slider> :
-              this.renderFoodItems()
-          }
-          </div>
-          <br className="separator" />
-          <div className="cooking-result">
+          {isFoodRelated ?
+            <div className="food-item-selector">
+            {this.md.mobile() ?
+                <Slider {...CookingConverter.foodSlider}>
+                  {this.renderFoodSliderItems()}
+                </Slider> :
+                this.renderFoodItems()
+            }
+            </div> :
+          null}
+
+          {isFoodRelated ? <br className="separator" /> : null}
+
+          <div className={'cooking-result ' + resultClass}>
             <table>
               <thead>
               <tr>
@@ -141,10 +184,12 @@ class CookingConverter extends React.Component {
 }
 
 CookingConverter.units = [
-  {name: "lb", fullName: "pound", idx: 0},
-  {name: "kg", fullName: "kilogram", idx: 1},
-  {name: "dl", fullName: "decilitres", idx: 2},
-  {name: "cup", fullName: "US ( and not imperial) cup", idx: 3},
+  {name: "lb", pretty: "lb", fullName: "pound", idx: 0},
+  {name: "kg", pretty: "kg", fullName: "kilogram", idx: 1},
+  {name: "dl", pretty: "dl", fullName: "decilitres", idx: 2},
+  {name: "cup", pretty: "cup", fullName: "US ( and not imperial) cup", idx: 3},
+  {name: "c", pretty: "\u00B0c", fullName: "Celcius", idx: -1},
+  {name: "f", pretty: "\u00B0f", fullName: "Farenheit", idx: -1},
 ];
 
 CookingConverter.foodItems = [
@@ -163,16 +208,20 @@ CookingConverter.foodItems = [
 
 CookingConverter.foodSlider = {
   dots: true,
+  arrows: false,
   infinite: true,
   speed: 500,
   slidesToShow: 3,
   slidesToScroll: 2
 }
+
 CookingConverter.converters = {
   "kg->lb": (x) => 2.20462 *x,
   "lb->kg": (x) => 0.453592 * x,
   "cup->dl": (x) => 2.36588 * x,
   "dl->cup": (x) => 0.422675 * x,
+  "f->c": (x) => (x - 32) / 1.8,
+  "c->f": (x) => (x * 1.8) + 32,
 }
 
 CookingConverter.convert = (inputValue, inputUnit, outputUnit, foodItem) => {

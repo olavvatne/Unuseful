@@ -10,12 +10,17 @@
     max-width: 800px;
     margin-top: 1em;
 
+    .temp-result {
+        width: 30%;
+        margin: auto;
+    }
+
     input {
       text-align: center;
     }
     .mui-btn {
       @media (max-width:800px){
-        padding: 0px 13px;
+        padding: 0px 10px;
       }
     }
     .cooking-units {
@@ -106,6 +111,10 @@
       table {
         width: 100%;
         border-spacing: 20px;
+
+        @media (max-width:800px){
+          border-spacing: 5px;
+        }
       }
       td {
         border-radius: 150px;
@@ -121,7 +130,8 @@
         text-shadow: 2px 1px #ccc;
 
         @media (max-width:800px){
-          font-size: 2.5em;
+          font-size: 1.8em;
+          border-radius: 50px;
         }
       }
 
