@@ -20,7 +20,7 @@
     }
     .mui-btn {
       @media (max-width:800px){
-        padding: 0px 10px;
+        padding: 0px 9px;
       }
     }
     .cooking-units {
@@ -111,9 +111,11 @@
       table {
         width: 100%;
         border-spacing: 20px;
+        display: block;
+        overflow: auto;
 
         @media (max-width:800px){
-          border-spacing: 5px;
+          border-spacing: 4px;
         }
       }
       td {
@@ -130,7 +132,8 @@
         text-shadow: 2px 1px #ccc;
 
         @media (max-width:800px){
-          font-size: 1.8em;
+          font-size: 1.4em;
+          //background-color: transparent;
           border-radius: 50px;
         }
       }
