@@ -135,7 +135,6 @@ class PolygonWallpaper extends React.Component {
 
   renderDownloadLink(screenIdx, canvas) {
     const pxPerScreen = Math.floor(this.state.width / this.state.screens);
-    console.log(screenIdx);
     // Create a sub-canvas from master canvas containing entire wallpaper. Lazy generation
     // of png image from sub canvas. When user clicks button.
     const wallPaperUrl = () => WallpaperOverlay.getDataURLSubImage(
@@ -143,11 +142,11 @@ class PolygonWallpaper extends React.Component {
       pxPerScreen*screenIdx,
       0,
       pxPerScreen,
-      this.state.heigth);
+      this.state.height);
 
     const saveAction = () => {WallpaperOverlay.saveAs(wallPaperUrl(), 'wallpaper' + screenIdx)};
     const name = WallpaperOverlay.ReadableName[this.state.screens-1][screenIdx];
-    return ( <a key={'sc' + screenIdx} style={{marginRight: "10px" }} href="" onClick={saveAction}>Wallpaper {name}</a>);
+    return ( <a key={'sc' + screenIdx} style={{marginRight: "10px" }} href="#" onClick={saveAction}>Wallpaper {name}</a>);
   }
 
   render() {
