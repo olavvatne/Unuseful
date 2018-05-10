@@ -17,7 +17,6 @@ class BMI extends React.Component {
     _validateNumber(stateName, errorName) {
         var v = this.refs[stateName].getValue();
         var regex = /^[0-9]+([,.][0-9]+)?$/g;
-        console.log(v);
         if(!regex.test(v) && v.length > 0) {
             console.log("ERROR");
             this.setState({[errorName]: 'Not a number'});

@@ -42,10 +42,10 @@ class WallpaperOverlay extends React.Component {
 }
 
 WallpaperOverlay.propTypes = {
-  screens: React.PropTypes.number.isRequired,
-  canvas: React.PropTypes.object.isRequired,
-  fullWidth: React.PropTypes.number.isRequired,
-  fullHeight: React.PropTypes.number.isRequired,
+  screens: PropTypes.number.isRequired,
+  canvas: PropTypes.object.isRequired,
+  fullWidth: PropTypes.number.isRequired,
+  fullHeight: PropTypes.number.isRequired,
 };
 
 WallpaperOverlay.getDataURLSubImage = function(canvas,x,y,w,h) {

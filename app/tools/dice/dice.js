@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import UIButton from '../../common/UIButton.js';
 import UISelect from '../../common/UISelect.js';
 
@@ -136,7 +137,7 @@ class Die extends React.Component {
 
 
 Die.PropTypes = {
-    number: React.PropTypes.number.isRequired
+    number: PropTypes.number.isRequired
 };
 Die.defaultProps = {
     number: 1

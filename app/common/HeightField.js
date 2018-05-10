@@ -9,6 +9,7 @@ class HeightField extends React.Component {
         super();
         this._validateHeight = this._validateNumber.bind(this, 'height', 'heightNotNumber');
         this.state = {heightNotNumber: null};
+        this.unitSelect = React.createRef();
     }
 
 
@@ -16,7 +17,6 @@ class HeightField extends React.Component {
     _validateNumber(stateName, errorName) {
         var v = this.refs[stateName].getValue();
         var regex = /^[0-9]+([,.][0-9]+)?$/g;
-        console.log(v);
         if(!regex.test(v) && v.length > 0) {
             console.log("ERROR");
             this.setState({[errorName]: 'Not a number'});
@@ -32,7 +32,7 @@ class HeightField extends React.Component {
         }
 
         var height = this.refs.height.getValue();
-        var unit = this.refs.unit.getValue();
+        var unit = this.unitSelect.current.getValue();
         if(unit === HeightField.CM) {
             return height;
         }
@@ -45,7 +45,7 @@ class HeightField extends React.Component {
     }
 
     render() {
-        let heightUnits = [
+        let units = [
             { payload: HeightField.CM, text: 'cm' },
             { payload: HeightField.INCHES, text: 'inches' },
         ];
@@ -56,8 +56,7 @@ class HeightField extends React.Component {
                   errorText={this.state.heightNotNumber}
                   onChange={this._validateHeight}
                   validationPattern="\d+(\.\d*)?"/>
-                <UISelect menuItems={heightUnits} ref="unit"
-                  value={this.state.heightUnit} //not used
+                <UISelect menuItems={units}  value={units[0]} ref={this.unitSelect}
                   labelText="Unit"/>
             </div>
         );

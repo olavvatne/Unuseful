@@ -13,7 +13,6 @@ class UIIncrementButton extends React.Component {
     }
 
     componentWillMount() {
-        console.log(this.props.initvalue);
         this.setState({count: parseInt(this.props.initvalue)});
     }
 

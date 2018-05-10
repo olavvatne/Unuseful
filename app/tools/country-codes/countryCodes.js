@@ -40,8 +40,6 @@ class CountryCodes extends React.Component {
 
         var re = RegExp(change, 'i');
 
-        //console.log(countries);
-
         for (var c in countries) {
             var full_name = countries[c].full_name;
             var short_name = countries[c].short_name;

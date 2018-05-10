@@ -8,6 +8,7 @@ class WeightField extends React.Component {
         super();
         this._validateWeight = this._validateNumber.bind(this, 'weight', 'weightNotNumber');
         this.state = {weightNotNumber: null};
+        this.unitSelect = React.createRef();
     }
 
 
@@ -15,7 +16,6 @@ class WeightField extends React.Component {
     _validateNumber(stateName, errorName) {
         var v = this.refs[stateName].getValue();
         var regex = /^[0-9]+([,.][0-9]+)?$/g;
-        console.log(v);
         if(!regex.test(v) && v.length > 0) {
             console.log("ERROR");
             this.setState({[errorName]: 'Not a number'});
@@ -29,7 +29,7 @@ class WeightField extends React.Component {
         if(!this.refs.weight) {
             return null;
         }
-        var unit = this.refs.unit.getValue();
+        var unit = this.unitSelect.current.state.value;
         var weight = this.refs.weight.getValue();
         if(unit === WeightField.KG) {
             return weight;
@@ -43,7 +43,7 @@ class WeightField extends React.Component {
     }
 
     render() {
-        let weightUnits = [
+        let units = [
             { payload: WeightField.KG, text: 'kg' },
             { payload: WeightField.LBS, text: 'lbs' },
         ];
@@ -54,8 +54,7 @@ class WeightField extends React.Component {
                 errorText={this.state.weightNotNumber}
                 onChange={this._validateWeight}
                 validationPattern="\d+(\.\d*)?"/>
-              <UISelect menuItems={weightUnits} ref="unit"
-                value={this.state.heightUnit} //Not used
+              <UISelect menuItems={units} value={units[0]} ref={this.unitSelect}
                 labelText="Unit"/>
             </div>
         );
