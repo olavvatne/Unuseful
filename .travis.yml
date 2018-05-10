@@ -1,6 +1,18 @@
 language: node_js
 node_js: "8"
 
+env:
+  - CXX=g++-5
+before_install:
+  - npm install -g node-gyp
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:ubuntu-toolchain-r/test'
+    packages:
+      - g++-5
+      - libgif-dev
+
 install: npm install
 cache:
   directories:
@@ -8,6 +20,7 @@ cache:
 
 before_script:
   - npm install -g gulp-cli
+  - gulp -v
 script:
   - NODE_ENV=production gulp build
   - echo $WEB_URL > ./build/CNAME

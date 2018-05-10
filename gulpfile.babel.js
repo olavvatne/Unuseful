@@ -1,3 +1,5 @@
+'use strict';
+
 import gulp from 'gulp';
 import sass from 'gulp-sass';
 import browserSync from 'browser-sync';
@@ -146,7 +148,7 @@ const createBundle = options => {
   let b = browserify(opts);
   b.external(dependencies);
   b.transform(babelify, {
-    presets: ["es2015"],
+    presets: ["env"],
     sourceMaps: environment === envTypes.development
   });
   // Envify replaces Node-style environment variables with plain strings.
