@@ -1,0 +1,30 @@
+.character-container {
+  -moz-transition: color 0.2s ease-in, border 0.1s ease-in;
+  -o-transition: color 0.2s ease-in, border 0.1s ease-in;
+  -webkit-transition: color 0.2s ease-in, border 0.1s ease-in;
+  transition: color 0.2s ease-in, border 0.1s ease-in;
+  cursor: pointer;
+  border: 2px solid #BCBCBC;
+  width: 120px;
+  min-height: 110px;
+  text-align: center;
+  display: inline-block;
+  margin-right: -2px;
+  margin-top: -2px;
+  position: relative; }
+  .character-container .character-container__img {
+    font-size: 3em;
+    color: #2A363B; }
+
+.character-container:hover {
+  border: 2px solid #3F51B5;
+  z-index: 5; }
+  .character-container:hover p {
+    color: #3F51B5; }
+
+.view {
+  margin: 30px;
+  color: #D95829;
+  border-color: #D95829; }
+  .view .character-container__img {
+    color: #D95829; }

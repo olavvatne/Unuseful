@@ -1,0 +1,19 @@
+#about-row {
+  padding: 0px;
+  padding-bottom: 40px; }
+
+.dice-row {
+  display: inline-block;
+  padding: 30px; }
+  .dice-row h1 {
+    display: inline;
+    padding: 10px; }
+
+#dices-row {
+  min-height: 160px; }
+
+#btn-addDie {
+  margin: 15px; }
+
+#select-die-eyes {
+  width: 40%; }

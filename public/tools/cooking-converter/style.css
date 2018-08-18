@@ -1,0 +1,100 @@
+.cooking-wrapper .cooking-content {
+  text-align: Center;
+  margin: auto;
+  max-width: 800px;
+  margin-top: 1em; }
+  .cooking-wrapper .cooking-content .temp-result {
+    width: 30%;
+    margin: auto; }
+  .cooking-wrapper .cooking-content input {
+    text-align: center; }
+  @media (max-width: 800px) {
+    .cooking-wrapper .cooking-content .mui-btn {
+      padding: 0px 9px; } }
+  .cooking-wrapper .cooking-content .cooking-units {
+    margin-bottom: 1em; }
+  .cooking-wrapper .cooking-content .food-item-selector {
+    margin-top: 1em;
+    margin-bottom: 1em; }
+    .cooking-wrapper .cooking-content .food-item-selector p {
+      position: absolute;
+      bottom: 0;
+      margin: 0.7em;
+      padding-left: 0.2em;
+      padding-right: 0.2em;
+      text-align: center;
+      color: white;
+      background: black;
+      /* fallback color */
+      background: rgba(0, 0, 0, 0.7); }
+      @media (min-width: 800px) {
+        .cooking-wrapper .cooking-content .food-item-selector p {
+          font-size: 1.5em;
+          margin: 0.5em; } }
+    .cooking-wrapper .cooking-content .food-item-selector .image-container-desktop {
+      border: 4px solid transparent;
+      position: relative;
+      display: inline-block;
+      margin: 1em;
+      height: 120px;
+      width: 120px; }
+      @media (max-width: 800px) {
+        .cooking-wrapper .cooking-content .food-item-selector .image-container-desktop {
+          height: 100px;
+          width: 100px; } }
+      .cooking-wrapper .cooking-content .food-item-selector .image-container-desktop img {
+        object-fit: cover;
+        width: 100%; }
+    .cooking-wrapper .cooking-content .food-item-selector .food-selected {
+      border: 4px solid #2196F3; }
+    .cooking-wrapper .cooking-content .food-item-selector .food-item .image-container-mobile {
+      position: relative;
+      width: 90%;
+      vertical-align: middle; }
+      .cooking-wrapper .cooking-content .food-item-selector .food-item .image-container-mobile img {
+        background-color: gray;
+        object-fit: cover;
+        width: 100%;
+        user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-drag: none;
+        -webkit-user-select: none;
+        -ms-user-select: none; }
+  .cooking-wrapper .cooking-content .separator {
+    content: '';
+    display: block;
+    margin-top: 2px;
+    border-top: 1px solid #8c8b8b;
+    border-bottom: 1px solid #fff; }
+  .cooking-wrapper .cooking-content .cooking-result {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    /* align horizontal */
+    align-items: center;
+    /* align vertical */ }
+    .cooking-wrapper .cooking-content .cooking-result table {
+      width: 100%;
+      border-spacing: 20px;
+      display: block;
+      overflow: auto; }
+      @media (max-width: 800px) {
+        .cooking-wrapper .cooking-content .cooking-result table {
+          border-spacing: 4px; } }
+    .cooking-wrapper .cooking-content .cooking-result td {
+      border-radius: 150px;
+      background-color: white;
+      padding-top: 0.1em;
+      padding-bottom: 0.1em;
+      color: #3B467C;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      line-height: 1.1em;
+      font-size: 4em;
+      font-family: "Inconsolata";
+      text-shadow: 2px 1px #ccc; }
+      @media (max-width: 800px) {
+        .cooking-wrapper .cooking-content .cooking-result td {
+          font-size: 1.4em;
+          border-radius: 50px; } }

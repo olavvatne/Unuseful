@@ -1,0 +1,31 @@
+.countryCodesComponent {
+  text-align: center; }
+
+@media screen and (min-width: 500px) {
+  .countryCodesTable {
+    width: 450px !important; } }
+
+.countryCodesTable {
+  margin: auto;
+  padding-left: 30px;
+  width: 250px; }
+  .countryCodesTable tbody {
+    text-align: left; }
+    .countryCodesTable tbody td {
+      padding: 7px;
+      padding-left: 10px;
+      padding-bottom: 0px;
+      border-bottom: 1px solid darkgray; }
+    .countryCodesTable tbody .cname {
+      float: left;
+      line-height: 38px;
+      vertical-align: middle; }
+    .countryCodesTable tbody .ccode {
+      float: right;
+      line-height: 38px;
+      vertical-align: middle; }
+    .countryCodesTable tbody .cflag {
+      display: inline;
+      float: left;
+      padding-left: 0;
+      padding-right: 1em; }
