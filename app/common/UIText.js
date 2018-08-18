@@ -22,6 +22,13 @@ class UIText extends React.Component {
         return this.refs.element.value;
     }
 
+    setValue(val) {
+      this.setState({value: val});
+    }
+
+    isValid() {
+      return this.refs.element.validity.valid;
+    }
     reset() {
       this.setState({value: ""});
     }

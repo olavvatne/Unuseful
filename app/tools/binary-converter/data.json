@@ -1,0 +1,9 @@
+{
+  "pageTitle": "Binary/Hex/Octal/integer Converter",
+  "toolTitle": "Binary/Hex/Octal/Integer Converter",
+  "toolDescription": "",
+  "toolMetaDescription": "Hex binary decimal octal converter calculator",
+  "toolPath": "binary-converter",
+  "toolContainerClass": "mui-panel",
+  "toolImage": "binary-code.svg"
+}
